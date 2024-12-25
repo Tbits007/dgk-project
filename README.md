@@ -48,18 +48,4 @@ This repository demonstrates a microservices architecture composed of the follow
 - **Message Broker**: RabbitMQ or Kafka for asynchronous communication.
 - **Containerization**: Docker for packaging and deployment.
 - **Orchestration**: Docker Compose (optionally Kubernetes for scaling).
-
----
-
-## 🚀 Setup and Deployment
-
-### Prerequisites
-
-1. **Install Dependencies**:
-   - [Docker](https://docs.docker.com/get-docker/)
-   - [Docker Compose](https://docs.docker.com/compose/install/)
-
-2. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/username/microservices-architecture-example.git
-   cd microservices-architecture-example
+- 
