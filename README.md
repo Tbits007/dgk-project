@@ -48,4 +48,3 @@ This repository demonstrates a microservices architecture composed of the follow
 - **Message Broker**: RabbitMQ or Kafka for asynchronous communication.
 - **Containerization**: Docker for packaging and deployment.
 - **Orchestration**: Docker Compose (optionally Kubernetes for scaling).
-- 
