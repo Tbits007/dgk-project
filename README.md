@@ -15,7 +15,7 @@ This architecture promotes **scalability**, **modularity**, and **fault toleranc
 
 ## ⚙️ Architecture Overview
 
-![Architecture Diagram]![image](https://github.com/user-attachments/assets/0ee998e5-b5c5-44ff-ae49-42b6584f691c)
+![image](https://github.com/user-attachments/assets/0ee998e5-b5c5-44ff-ae49-42b6584f691c)
 
 
 ### Components:
