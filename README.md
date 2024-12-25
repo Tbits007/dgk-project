@@ -45,6 +45,6 @@ This repository demonstrates a microservices architecture composed of the follow
 - **Databases**:
   - **PostgreSQL**: User data storage for the `Auth Service`.
   - **MongoDB**: Event and tracking data storage for the `Tracking Service`.
-- **Message Broker**: RabbitMQ or Kafka for asynchronous communication.
+- **Message Broker**: Kafka for asynchronous communication, integrated with [FastStream](https://faststream.dev/) for high-level streaming abstractions.
 - **Containerization**: Docker for packaging and deployment.
 - **Orchestration**: Docker Compose (optionally Kubernetes for scaling).
