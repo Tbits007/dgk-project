@@ -9,8 +9,6 @@ This repository demonstrates a microservices architecture composed of the follow
 - **Tracking Service**: Handles event tracking and monitoring, storing data in **MongoDB**.
 - **Message Broker**: Facilitates asynchronous communication between services, ensuring reliable message delivery.
 
-This architecture promotes **scalability**, **modularity**, and **fault tolerance** by decoupling responsibilities into isolated services.
-
 ---
 
 ## ⚙️ Architecture Overview
