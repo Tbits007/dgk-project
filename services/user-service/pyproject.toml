@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "user-service"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = {extras = ["all"], version = "^0.115.6"}
+faststream = {extras = ["kafka"], version = "^0.5.33"}
+sqlalchemy = "^2.0.36"
+asyncpg = "^0.30.0"
+alembic = "^1.14.0"
+dishka = "^1.4.2"
+bcrypt = "^4.2.1"
+python-jose = "^3.3.0"
+passlib = "^1.7.4"
+httpx = "^0.28.1"
+pytest-asyncio = "^0.25.0"
+pytest = "^8.3.4"
+aiosmtplib = "^3.0.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
