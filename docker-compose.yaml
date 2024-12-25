@@ -1,0 +1,88 @@
+# docker-compose down --volumes
+# docker-compose up --build
+services:
+    zookeeper:
+        image: bitnami/zookeeper:latest
+        ports:
+            - 2181:2181
+        environment:
+            - ALLOW_ANONYMOUS_LOGIN=yes
+
+    kafka:
+        image: bitnami/kafka:latest
+        ports:
+            - 9092:9092
+            - 9093:9093
+        environment:
+            - KAFKA_BROKER_ID=1
+            - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092
+            - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://127.0.0.1:9092
+            - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+            - ALLOW_PLAINTEXT_LISTENER=yes
+            - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT
+            - KAFKA_CFG_LISTENERS=CLIENT://:9092
+            - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://kafka:9092
+            - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=CLIENT
+        depends_on:
+            - zookeeper
+
+    postgres:
+        image: postgres
+        ports:
+            - 5432:5432
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: postgres
+
+    user-service:
+        build:
+            context: ./services/user-service
+            dockerfile: Dockerfile
+        command: uvicorn --factory app.main.run:create_app --host 0.0.0.0 --port 8000
+        ports:
+            - 8000:8000
+        volumes:
+            - ./services/user-service:/usr/src/app
+        environment:
+            - POSTGRES_HOST=postgres
+            - POSTGRES_PORT=5432
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=postgres
+
+            - SECRET_KEY=6f8a07b8c7224ef299fae7a5e45b939b4f8bbf657a2a4d53ab16a3aab7f7bb72
+            - ALGORITHM=HS256
+            - ACCESS_TOKEN_EXPIRES_MINUTES=30
+            - REFRESH_TOKEN_EXPIRES_MINUTES=21600
+
+            - SMTP_HOST=smtp.gmail.com
+            - SMTP_PORT=465
+            - SMTP_USER=aasjfasdj@gmail.com
+            - SMTP_PASSWORD=safdasfasdfdsafasd
+
+            - KAFKA_HOST=kafka
+            - KAFKA_PORT=9092            
+        depends_on:
+            - postgres
+            - kafka
+
+
+    tracking-service:
+        build:
+            context: ./services/tracking-service
+            dockerfile: Dockerfile
+        command: faststream run --factory app.main.run:create_app
+        ports:
+            - 8080:8000
+        volumes:
+            - ./services/tracking-service:/usr/src/app
+        environment:
+            - KAFKA_HOST=kafka
+            - KAFKA_PORT=9092
+            - MONGODB_URI=mongodb+srv://shogenovtema:oU0UH29obRMhVKHe@cluster0.ofbf3.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+            - MONGODB_DB_NAME=database_example
+            - MONGODB_COLLECTION_NAME=collection_example
+        depends_on:
+            - kafka
+            - zookeeper
